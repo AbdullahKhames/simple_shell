@@ -49,7 +49,7 @@ void shell_looper(shelldata_t *datash)
 	loop = 1;
 	while (loop == 1)
 	{
-		write(STDIN_FILENO, "^-^ ", 4);
+		write(STDIN_FILENO, "shelly$ ", 8);
 		input = line_reader(&i_eof);
 		if (i_eof != -1)
 		{
