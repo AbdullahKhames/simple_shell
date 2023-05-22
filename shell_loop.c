@@ -3,36 +3,36 @@
 /**
  * comment_remover - deletes comments from the input
  *
- * @in: input string
+ * @c: input string
  * Return: input without comments
  */
-char *comment_remover(char *in)
+char *comment_remover(char *c)
 {
-	int i, up_to;
+	int i, len;
 
-	up_to = 0;
-	for (i = 0; in[i]; i++)
+	len = 0;
+	for (i = 0; c[i]; i++)
 	{
-		if (in[i] == '#')
+		if (c[i] == '#')
 		{
 			if (i == 0)
 			{
-				free(in);
+				free(c);
 				return (NULL);
 			}
 
-			if (in[i - 1] == ' ' || in[i - 1] == '\t' || in[i - 1] == ';')
-				up_to = i;
+			if (c[i - 1] == ' ' || c[i - 1] == '\t' || c[i - 1] == ';')
+				len = i;
 		}
 	}
 
-	if (up_to != 0)
+	if (len != 0)
 	{
-		in = _realloco(in, i, up_to + 1);
-		in[up_to] = '\0';
+		c = _realloco(c, i, len + 1);
+		c[len] = '\0';
 	}
 
-	return (in);
+	return (c);
 }
 
 /**
@@ -75,4 +75,3 @@ void shell_looper(shelldata_t *datash)
 		}
 	}
 }
-
