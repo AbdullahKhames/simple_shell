@@ -19,7 +19,7 @@ new = malloc(sizeof(r_varo));
 if (new == NULL)
 return (NULL);
 
-new->len_varo = lvaro;
+new->len_var = lvaro;
 new->val = val;
 new->len_val = lval;
 

@@ -14,7 +14,7 @@ len = _strleno(s);
 new = malloc(sizeof(char) * (len + 1));
 if (new == NULL)
 return (NULL);
-_memcpy(new, s, len + 1);
+_memcpyo(new, s, len + 1);
 return (new);
 }
 

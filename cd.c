@@ -13,29 +13,29 @@ char pwd[PATH_MAX];
 char *dir, *cp_pwd, *cp_strtok_pwd;
 
 getcwd(pwd, sizeof(pwd));
-cp_pwd = _strdup(pwd);
+cp_pwd = _strdupo(pwd);
 set_env("OLDPWD", cp_pwd, datash);
 dir = datash->args[1];
-if (_strcmp(".", dir) == 0)
+if (_strcmpo(".", dir) == 0)
 {
 set_env("PWD", cp_pwd, datash);
 free(cp_pwd);
 return;
 }
-if (_strcmp("/", cp_pwd) == 0)
+if (_strcmpo("/", cp_pwd) == 0)
 {
 free(cp_pwd);
 return;
 }
 cp_strtok_pwd = cp_pwd;
-rev_string(cp_strtok_pwd);
-cp_strtok_pwd = _strtok(cp_strtok_pwd, "/");
+rev_stringo(cp_strtok_pwd);
+cp_strtok_pwd = _strtoko(cp_strtok_pwd, "/");
 if (cp_strtok_pwd != NULL)
 {
-cp_strtok_pwd = _strtok(NULL, "\0");
+cp_strtok_pwd = _strtoko(NULL, "\0");
 
 if (cp_strtok_pwd != NULL)
-rev_string(cp_strtok_pwd);
+rev_stringo(cp_strtok_pwd);
 }
 if (cp_strtok_pwd != NULL)
 {
@@ -68,14 +68,14 @@ getcwd(pwd, sizeof(pwd));
 dir = datash->args[1];
 if (chdir(dir) == -1)
 {
-get_error(datash, 2);
+error_getter(datash, 2);
 return;
 }
 
-cp_pwd = _strdup(pwd);
+cp_pwd = _strdupo(pwd);
 set_env("OLDPWD", cp_pwd, datash);
 
-cp_dir = _strdup(dir);
+cp_dir = _strdupo(dir);
 set_env("PWD", cp_dir, datash);
 
 free(cp_pwd);
@@ -98,14 +98,14 @@ char pwd[PATH_MAX];
 char *p_pwd, *p_oldpwd, *cp_pwd, *cp_oldpwd;
 
 getcwd(pwd, sizeof(pwd));
-cp_pwd = _strdup(pwd);
+cp_pwd = _strdupo(pwd);
 
 p_oldpwd = _getenv("OLDPWD", datash->_environ);
 
 if (p_oldpwd == NULL)
 cp_oldpwd = cp_pwd;
 else
-cp_oldpwd = _strdup(p_oldpwd);
+cp_oldpwd = _strdupo(p_oldpwd);
 
 set_env("OLDPWD", cp_pwd, datash);
 
@@ -116,7 +116,7 @@ set_env("PWD", cp_oldpwd, datash);
 
 p_pwd = _getenv("PWD", datash->_environ);
 
-write(STDOUT_FILENO, p_pwd, _strlen(p_pwd));
+write(STDOUT_FILENO, p_pwd, _strleno(p_pwd));
 write(STDOUT_FILENO, "\n", 1);
 
 free(cp_pwd);
@@ -140,7 +140,7 @@ char *p_pwd, *home;
 char pwd[PATH_MAX];
 
 getcwd(pwd, sizeof(pwd));
-p_pwd = _strdup(pwd);
+p_pwd = _strdupo(pwd);
 
 home = _getenv("HOME", datash->_environ);
 
@@ -153,7 +153,7 @@ return;
 
 if (chdir(home) == -1)
 {
-get_error(datash, 2);
+error_getter(datash, 2);
 free(p_pwd);
 return;
 }

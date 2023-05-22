@@ -22,7 +22,7 @@ char_newptr[i] = char_ptr[i];
 /**
  * _realloco - reallocates a memory block.
  * @ptr: pointer to the memory previously allocated.
- * @old_size: size, in bytes  of the allocated 
+ * @old_size: size, in bytes  of the allocate
  * @new_size: new size, in bytes, of new block.
  *
  * Return: ptr.
@@ -61,7 +61,7 @@ return (newptr);
 /**
  * _reallocdpo - reallocates a memory block of a doub
  * @ptr: double pointer to the memory previ
- * @old_size: size, in bytes, of the 
+ * @old_size: size, in bytes
  * @new_size: new size in bytes of the new memo
  *
  * Return: ptr.
