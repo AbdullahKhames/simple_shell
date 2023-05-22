@@ -37,35 +37,35 @@ char *comment_remover(char *c)
 
 /**
  * shell_looper - Loop of shell
- * @datash: data relevant (av, input, args)
+ * @shelldata: data relevant (av, input, args)
  *
  * Return: no return.
  */
-void shell_looper(shelldata_t *datash)
+void shell_looper(shelldata_t *shelldata)
 {
-	int loop, i_eof;
+	int loop, n;
 	char *input;
 
 	loop = 1;
 	while (loop == 1)
 	{
 		write(STDIN_FILENO, "shelly$ ", 8);
-		input = line_reader(&i_eof);
-		if (i_eof != -1)
+		input = line_reader(&n);
+		if (n != -1)
 		{
 			input = comment_remover(input);
 			if (input == NULL)
 				continue;
 
-			if (error_check_syntax(datash, input) == 1)
+			if (error_check_syntax(shelldata, input) == 1)
 			{
-				datash->status = 2;
+				shelldata->status = 2;
 				free(input);
 				continue;
 			}
-			input = vars_replace(input, datash);
-			loop = split_commands(datash, input);
-			datash->counter += 1;
+			input = vars_replace(input, shelldata);
+			loop = split_commands(shelldata, input);
+			shelldata->counter += 1;
 			free(input);
 		}
 		else
