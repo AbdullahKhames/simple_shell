@@ -52,7 +52,7 @@ void set_env(char *name, char *value, shelldata_t *shelldata)
 		free(var_env);
 	}
 
-	shelldata->_environ = _reallocdpo(shelldata->_environ, i, sizeof(char *) * (i + 2));
+	shelldata->_environ = _reallocdpo(shelldata->_environ, i, 8 * (i + 2));
 	shelldata->_environ[i] = copy_info(name, value);
 	shelldata->_environ[i + 1] = NULL;
 }
