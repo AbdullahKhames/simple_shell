@@ -1,48 +1,52 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * get_leno - Get the lenght of a num.
+ * get_leno - Get the length of a num.
  * @n: type int num.
- * Return: Lenght of a num.
+ * Return: Length of a num.
  */
 int get_leno(int n)
 {
 unsigned int n1;
-int lenght = 1;
+int length = 1;
 
 if (n < 0)
 {
-lenght++;
+length++;
 n1 = n * -1;
 }
 else
 {
 n1 = n;
 }
+
 while (n1 > 9)
 {
-lenght++;
+length++;
 n1 = n1 / 10;
 }
 
-return (lenght);
+return (length);
 }
+
 /**
- * utils_itoa - func convrt int to str.
+ * utils_itoa - func convert int to str.
  * @n: type int number
  * Return: String.
  */
 char *utils_itoa(int n)
 {
 unsigned int n1;
-int lenght = get_leno(n);
+int length = get_leno(n);
 char *buffer;
 
-buffer = malloc(sizeof(char) * (lenght + 1));
-if (buffer == 0)
+buffer = malloc(sizeof(char) * (length + 1));
+if (buffer == NULL)
 return (NULL);
 
-*(buffer + lenght) = '\0';
+buffer[length] = '\0';
 
 if (n < 0)
 {
@@ -54,14 +58,13 @@ else
 n1 = n;
 }
 
-lenght--;
+length--;
 do {
-*(buffer + lenght) = (n1 % 10) + '0';
+buffer[length] = (n1 % 10) + '0';
 n1 = n1 / 10;
-lenght--;
-}
-while (n1 > 0)
-		;
+length--;
+} while (n1 > 0);
+
 return (buffer);
 }
 
@@ -93,8 +96,8 @@ count++;
 
 for (i = count - size; i < count; i++)
 {
-oi = oi + ((*(s + i) - 48) * m);
+oi = oi + ((*(s + i) - '0') * m);
 m /= 10;
 }
-return (oi * pn);
-}
+
+return (oi *pn); }
