@@ -21,7 +21,7 @@ extern char **environ;
 
 
 /**
- * struct data - struct that contains all relevant data on runtime
+ * struct shelldata - struct that contains all relevant data on runtime
  * @av: argument vector
  * @_environ: environment variable
  * @pid: process ID of the shell
@@ -29,7 +29,6 @@ extern char **environ;
  * @args: tokens of the command line
  * @status: last status of the shell
  * @counter: lines counter
-
  */
 typedef struct shelldata
 {
