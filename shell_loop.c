@@ -1,53 +1,53 @@
 #include "main.h"
 
 /**
- * comment_remover - deletes comments from the input
+ * comment_remover - function to delete # deletes comments from the input
  *
- * @c: input string
+ * @src: input string
  * Return: input without comments
  */
-char *comment_remover(char *c)
+char *comment_remover(char *src)
 {
-	int i, len;
+	int i, length;
 
-	len = 0;
-	for (i = 0; c[i]; i++)
+	length = 0;
+	for (i = 0; src[i]; i++)
 	{
-		if (c[i] == '#')
+		if (src[i] == '#')
 		{
 			if (i == 0)
 			{
-				free(c);
+				free(src);
 				return (NULL);
 			}
 
-			if (c[i - 1] == ' ' || c[i - 1] == '\t' || c[i - 1] == ';')
-				len = i;
+			if (src[i - 1] == ' ' || src[i - 1] == '\t' || src[i - 1] == ';')
+				length = i;
 		}
 	}
 
-	if (len != 0)
+	if (length != 0)
 	{
-		c = _realloco(c, i, len + 1);
-		c[len] = '\0';
+		src = _realloco(src, i, length + 1);
+		src[length] = '\0';
 	}
 
-	return (c);
+	return (src);
 }
 
 /**
- * shell_looper - Loop of shell
+ * shell_looper - the main Loop of shell
  * @shelldata: data relevant (av, input, args)
  *
  * Return: no return.
  */
 void shell_looper(shelldata_t *shelldata)
 {
-	int loop, n;
+	int check_loop, n;
 	char *input;
 
-	loop = 1;
-	while (loop == 1)
+	check_loop = 1;
+	while (check_loop == 1)
 	{
 		write(STDIN_FILENO, "shelly$ ", 8);
 		input = line_reader(&n);
@@ -64,14 +64,15 @@ void shell_looper(shelldata_t *shelldata)
 				continue;
 			}
 			input = vars_replace(input, shelldata);
-			loop = split_commands(shelldata, input);
+			check_loop = split_commands(shelldata, input);
 			shelldata->counter += 1;
 			free(input);
 		}
 		else
 		{
-			loop = 0;
+			check_loop = 0;
 			free(input);
 		}
 	}
 }
+

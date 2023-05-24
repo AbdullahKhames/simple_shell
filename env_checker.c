@@ -10,22 +10,22 @@
  */
 void env_checker(r_varo **h, char *input, shelldata_t *shelldata)
 {
-	int row, chr, j, lval;
+	int row, sh_char, j, val_l;
 	char **_environment;
 
 	_environment = shelldata->_environ;
 	for (row = 0; _environment[row]; row++)
 	{
-		for (j = 1, chr = 0; _environment[row][chr]; chr++)
+		for (j = 1, sh_char = 0; _environment[row][sh_char]; sh_char++)
 		{
-			if (_environment[row][chr] == '=')
+			if (_environment[row][sh_char] == '=')
 			{
-				lval = _strleno(_environment[row] + chr + 1);
-				add_rvaro_node(h, j, _environment[row] + chr + 1, lval);
+				val_l = _strleno(_environment[row] + sh_char + 1);
+				add_rvaro_node(h, j, _environment[row] + sh_char + 1, val_l);
 				return;
 			}
 
-			if (input[j] == _environment[row][chr])
+			if (input[j] == _environment[row][sh_char])
 				j++;
 			else
 				break;
@@ -84,23 +84,23 @@ int vars_checker(r_varo **h, char *in, char *st, shelldata_t *data)
 
 	return (i);
 }
-
 /**
  * input_replace - replaces string into variables
  *
  * @head: head of the linked list
  * @input: input string
- * @new_input: new input string (replaced)
- * @nlen: new length
+ * @new_input: string to be replaced
+ * new input string (replaced)
+ * @new_leng: new length
  * Return: replaced string
  */
-char *input_replace(r_varo **head, char *input, char *new_input, int nlen)
+char *input_replace(r_varo **head, char *input, char *new_input, int new_leng)
 {
 	r_varo *indx;
 	int i, j, k;
 
 	indx = *head;
-	for (j = i = 0; i < nlen; i++)
+	for (j = i = 0; i < new_leng; i++)
 	{
 		if (input[j] == '$')
 		{
@@ -141,19 +141,19 @@ char *input_replace(r_varo **head, char *input, char *new_input, int nlen)
  * vars_replace - calls functions to replace string into vars
  *
  * @input: input string
- * @datash: data structure
+ * @shelldata: data structure
  * Return: replaced string
  */
-char *vars_replace(char *input, shelldata_t *datash)
+char *vars_replace(char *input, shelldata_t *shelldata)
 {
 	r_varo *head, *indx;
 	char *status, *new_input;
-	int olen, nlen;
+	int olen, new_length;
 
-	status = utils_itoa(datash->status);
+	status = utils_itoa(shelldata->status);
 	head = NULL;
 
-	olen = vars_checker(&head, input, status, datash);
+	olen = vars_checker(&head, input, status, shelldata);
 
 	if (head == NULL)
 	{
@@ -162,20 +162,20 @@ char *vars_replace(char *input, shelldata_t *datash)
 	}
 
 	indx = head;
-	nlen = 0;
+	new_length = 0;
 
 	while (indx != NULL)
 	{
-		nlen += (indx->len_val - indx->len_var);
+		new_length += (indx->len_val - indx->len_var);
 		indx = indx->next;
 	}
 
-	nlen += olen;
+	new_length += olen;
 
-	new_input = malloc(sizeof(char) * (nlen + 1));
-	new_input[nlen] = '\0';
+	new_input = malloc(sizeof(char) * (new_length + 1));
+	new_input[new_length] = '\0';
 
-	new_input = input_replace(&head, input, new_input, nlen);
+	new_input = input_replace(&head, input, new_input, new_length);
 
 	free(input);
 	free(status);
@@ -183,4 +183,3 @@ char *vars_replace(char *input, shelldata_t *datash)
 
 	return (new_input);
 }
-

@@ -1,18 +1,18 @@
 #include "main.h"
 
 /**
- * line_reader - reads the input string.
+ * line_reader - function to reads the input string.
  *
- * @read: return value of getline function
+ * @reader: return value of getline function
  * Return: input string
  */
-char *line_reader(int *read)
+char *line_reader(int *reader)
 {
-	char *input = NULL;
-	size_t bufsize = 0;
+	char *c = NULL;
+	size_t buffs = 0;
 
-	*read = getline(&input, &bufsize, stdin);
+	*reader = getline(&c, &buffs, stdin);
 
-	return (input);
+	return (c);
 }
 
