@@ -1,20 +1,20 @@
 #include "main.h"
 
 /**
- * env_cmp - compares env variables names
+ * env_cmp - function to compare environment variables names
  * with the name passed.
- * @nenv: name of the environment variable
+ * @currentenv: name of the environment variable
  * @name: name passed
  *
  * Return: 0 if are not equal. Another value if they are.
  */
-int env_cmp(const char *nenv, const char *name)
+int env_cmp(const char *currentenv, const char *name)
 {
 	int i;
 
-	for (i = 0; nenv[i] != '='; i++)
+	for (i = 0; currentenv[i] != '='; i++)
 	{
-		if (nenv[i] != name[i])
+		if (currentenv[i] != name[i])
 		{
 			return (0);
 		}
@@ -36,14 +36,11 @@ char *_getenv(const char *key, char **_environ)
 	char *ptr_env;
 	int i, mov;
 
-	/* Initialize ptr_env value */
+	
 	ptr_env = NULL;
 	mov = 0;
-	/* Compare all environment variables */
-	/* environ is declared in the header file */
 	for (i = 0; _environ[i]; i++)
 	{
-		/* If key and env are equal */
 		mov = env_cmp(_environ[i], key);
 		if (mov)
 		{

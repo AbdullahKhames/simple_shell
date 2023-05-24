@@ -1,19 +1,19 @@
 #include "main.h"
 
 /**
- * env_checker - checks if the typed variable is an env variable
+ * env_checker - checks for variable if present in current environment
  *
  * @h: head of linked list
- * @in: input string
- * @data: data structure
+ * @input: input string
+ * @ahelldata: data structure
  * Return: no return
  */
-void env_checker(r_varo **h, char *in, shelldata_t *data)
+void env_checker(r_varo **h, char *input, shelldata_t *shelldata)
 {
 	int row, chr, j, lval;
 	char **_environment;
 
-	_environment = data->_environ;
+	_environment = shelldata->_environ;
 	for (row = 0; _environment[row]; row++)
 	{
 		for (j = 1, chr = 0; _environment[row][chr]; chr++)
@@ -25,16 +25,16 @@ void env_checker(r_varo **h, char *in, shelldata_t *data)
 				return;
 			}
 
-			if (in[j] == _environment[row][chr])
+			if (input[j] == _environment[row][chr])
 				j++;
 			else
 				break;
 		}
 	}
 
-	for (j = 0; in[j]; j++)
+	for (j = 0; input[j]; j++)
 	{
-		if (in[j] == ' ' || in[j] == '\t' || in[j] == ';' || in[j] == '\n')
+		if (input[j] == ';' || input[j] == '\n' || input[j] == ' ' || input[j] == '\t')
 			break;
 	}
 

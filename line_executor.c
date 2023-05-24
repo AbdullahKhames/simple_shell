@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * line_executor - finds builtins and commands
+ * line_executor - search line for comands
  *
- * @shelldata: data relevant (args)
+ * @shelldata: data (args)
  * Return: 1 on success.
  */
 int line_executor(shelldata_t *shelldata)
