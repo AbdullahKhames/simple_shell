@@ -5,7 +5,7 @@
  *
  * @h: head of linked list
  * @input: input string
- * @ahelldata: data structure
+ * @shelldata: data structure
  * Return: no return
  */
 void env_checker(r_varo **h, char *input, shelldata_t *shelldata)
@@ -34,7 +34,9 @@ void env_checker(r_varo **h, char *input, shelldata_t *shelldata)
 
 	for (j = 0; input[j]; j++)
 	{
-		if (input[j] == ';' || input[j] == '\n' || input[j] == ' ' || input[j] == '\t')
+		if (input[j] == ';' || input[j] == '\n')
+			break;
+		else if (input[j] == ' ' || input[j] == '\t')
 			break;
 	}
 

@@ -36,7 +36,6 @@ char *_getenv(const char *key, char **_environ)
 	char *ptr_env;
 	int i, mov;
 
-	
 	ptr_env = NULL;
 	mov = 0;
 	for (i = 0; _environ[i]; i++)
